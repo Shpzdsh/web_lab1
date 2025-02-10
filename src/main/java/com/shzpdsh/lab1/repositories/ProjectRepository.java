@@ -32,7 +32,7 @@ public class ProjectRepository implements RepositoryInterface {
 
     @Override
     public ProjectModel save(ProjectModel projectModel) {
-        String sqlRequest = "INSERT INTO project (name,description,start,end) VALUES (?,?,?,?) RETURNING id";
+        String sqlRequest = "INSERT INTO project (name, description, start, end) VALUES (?, ?, ?, ?) RETURNING id";
         Long id = jdbcTemplate.queryForObject(sqlRequest, Long.class,
             projectModel.getName(),
             projectModel.getDescription(),
