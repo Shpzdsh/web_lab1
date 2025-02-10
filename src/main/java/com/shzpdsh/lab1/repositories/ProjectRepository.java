@@ -25,14 +25,14 @@ public class ProjectRepository implements RepositoryInterface {
         projectModel.setId(rs.getLong("id"));
         projectModel.setName(rs.getString("name"));
         projectModel.setDescription(rs.getString("description"));
-        projectModel.setStart(rs.getDate("start"));
-        projectModel.setEnd(rs.getDate("end"));
+        projectModel.setStart(rs.getDate("start_p"));
+        projectModel.setEnd(rs.getDate("end_p"));
         return projectModel;
     };
 
     @Override
     public ProjectModel save(ProjectModel projectModel) {
-        String sqlRequest = "INSERT INTO project (name, description, start, end) VALUES (?, ?, ?, ?) RETURNING id";
+        String sqlRequest = "INSERT INTO project (name, description, start_p, end_p) VALUES (?, ?, ?, ?) RETURNING id";
         Long id = jdbcTemplate.queryForObject(sqlRequest, Long.class,
             projectModel.getName(),
             projectModel.getDescription(),
@@ -44,13 +44,14 @@ public class ProjectRepository implements RepositoryInterface {
 
     @Override
     public ProjectModel update(Long id, ProjectModel projectModel) {
-        String sqlRequest = "UPDATE project SET name = ?, description = ?, start = ?, end = ? WHERE id = ?";
+        String sqlRequest = "UPDATE project SET name = ?, description = ?, start_p = ?, end_p = ? WHERE id = ?";
         jdbcTemplate.update(sqlRequest,
             projectModel.getName(),
             projectModel.getDescription(),
             projectModel.getStart(),
             projectModel.getEnd(),
             id);
+        projectModel.setId(id);
         return projectModel;
     }
 
@@ -69,9 +70,9 @@ public class ProjectRepository implements RepositoryInterface {
     }
 
     @Override
-    public List<ProjectModel> findByDateRange(Date start, Date end) {
-        String sqlRequest = "SELECT * FROM project WHERE start BETWEEN ? AND ? OR end BETWEEN ? AND ?";
-        return jdbcTemplate.query(sqlRequest, rowMapper, start, end);
+    public List<ProjectModel> findByDateRange(Date start1, Date end1) {
+        String sqlRequest = "SELECT * FROM project WHERE (start_p BETWEEN ? AND ?) OR (end_p BETWEEN ? AND ?)";
+        return jdbcTemplate.query(sqlRequest, rowMapper, start1, end1, start1, end1);
     }
 
     @Override

@@ -15,7 +15,7 @@ public interface RepositoryInterface {
     
     ProjectModel findById(Long id);
     
-    List<ProjectModel> findByDateRange(Date start, Date end);
+    List<ProjectModel> findByDateRange(Date start1, Date end1);
     
     List<ProjectModel> findAll();
 }

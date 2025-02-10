@@ -33,8 +33,8 @@ public class ProjectService {
         return projectRepository.findById(id);
     }
 
-    public List<ProjectModel> getProgectsByDateRange(Date start, Date end) {
-        return projectRepository.findByDateRange(start, end);
+    public List<ProjectModel> getProgectsByDateRange(Date start1, Date end1) {
+        return projectRepository.findByDateRange(start1, end1);
     }
 
     public List<ProjectModel> getAllProgects() {

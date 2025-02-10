@@ -52,8 +52,8 @@ public class ProjectController {
     }
 
     @GetMapping
-    public List<ProjectModel> getProjectsByDateRange(@RequestParam Date start, @RequestParam Date end) {
-        return projectService.getProgectsByDateRange(start, end);
+    public List<ProjectModel> getProjectsByDateRange(@RequestParam Date start1, @RequestParam Date end1) {
+        return projectService.getProgectsByDateRange(start1, end1);
     }
     
     @GetMapping("/all")
