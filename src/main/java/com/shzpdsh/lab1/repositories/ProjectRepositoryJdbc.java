@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Repository
 @RequiredArgsConstructor
-public class ProjectRepository implements RepositoryInterface {
+public class ProjectRepositoryJdbc implements RepositoryInterface {
 
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
